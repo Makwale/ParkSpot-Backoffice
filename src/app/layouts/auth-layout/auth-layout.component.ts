@@ -12,7 +12,7 @@ export class AuthLayoutComponent implements OnInit, OnDestroy {
   test: Date = new Date();
   public isCollapsed = true;
 
-  constructor(private router: Router, public acs: AccountService) {}
+  constructor(private router: Router, public acs: AccountService) { }
 
   ngOnInit() {
     var html = document.getElementsByTagName("html")[0];
@@ -20,20 +20,20 @@ export class AuthLayoutComponent implements OnInit, OnDestroy {
     var body = document.getElementsByTagName("body")[0];
     body.classList.add("bg-default");
     var navbar = document.getElementsByClassName("navbar-horizontal")[0];
-    navbar.classList.add("navbar-light");
-    navbar.classList.add("navbar-transparent");
+    navbar?.classList.add("navbar-light");
+    navbar?.classList.add("navbar-transparent");
   }
   ngOnDestroy() {
-    var html = document.getElementsByTagName("html")[0];
+    // var html = document.getElementsByTagName("html")[0];
     // html.classList.remove("auth-layout");
     var body = document.getElementsByTagName("body")[0];
     body.classList.remove("bg-default");
     var navbar = document.getElementsByClassName("navbar-horizontal")[0];
-    navbar.classList.remove("navbar-light");
-    navbar.classList.remove("navbar-transparent");
+    navbar?.classList.remove("navbar-light");
+    navbar?.classList.remove("navbar-transparent");
   }
 
-  logout(){
+  logout() {
     Auth.signOut().then(() => {
       this.acs.loginStatus = false;
       this.acs.user = null;

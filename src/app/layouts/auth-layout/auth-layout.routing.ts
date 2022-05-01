@@ -1,7 +1,7 @@
 import { Routes } from "@angular/router";
 import { PropertiesComponent } from "src/app/pages/examples/properties/properties.component";
 
-import { LoginComponent } from "../../pages/examples/login/login.component";
+import { LoginComponent } from "./login/login.component";
 
 import { RegisterComponent } from "../../pages/examples/register/register.component";
 import { PresentationComponent } from "../../pages/presentation/presentation.component";

@@ -20,37 +20,15 @@ const ADD_USER = gql`mutation AddUser($id: String, $firstname: String, $lastname
 }
 `
 
-const GET_USER = gql `query GetUser($id: String!) {
-  user: USER_by_pk(id: $id) {
+const GET_USER = gql`
+query GetUser {
+  user: user(where: {role: {_eq: "admin"}}) {
     id
-    lastname
-    phone
-    email
-    firstname
-    address: ADDRESSes {
-      homeAddress
-      city
-      postalCode
-    }
-    client: CLIENTs {
-      id
-      properties: PROPERTies {
-        id
-        type
-        price
-        desc
-        address: PROPERTYADDRESS {
-          homeAddress
-          city
-          postalCode
-          id
-        }
-      }
-    }
+    name
+    surname
   }
 }
-
-`
+`;
 
 
 
@@ -88,7 +66,7 @@ const ADD_PROPERTY_ADDRESS = gql`mutation AddAddress($homeAddress: String, $city
 }
 `
 
-const ADD_PROPERTY = gql `mutation AddProperty($type: String, $price: Int, $desc: String, $clientid: Int, $propertyaddressid: Int) {
+const ADD_PROPERTY = gql`mutation AddProperty($type: String, $price: Int, $desc: String, $clientid: Int, $propertyaddressid: Int) {
   property: insert_PROPERTY(objects: {type: $type, price: $price, desc: $desc, clientid: $clientid, propertyaddressid: $propertyaddressid}) {
     returning {
       id
@@ -112,7 +90,7 @@ const ADD_IMAGE = gql`mutation AddImage($propertyid: Int, $key: String) {
 }
 `
 
-const GET_PROPERTIES_CUSTOMERS = gql `query GetProperties {
+const GET_PROPERTIES_CUSTOMERS = gql`query GetProperties {
   properties: PROPERTY {
     id
     type
@@ -132,7 +110,7 @@ const GET_PROPERTIES_CUSTOMERS = gql `query GetProperties {
 
 
 
-const UPDATE_PROPERTY = gql `mutation UpdateProperty($id: Int, $type: String, $price: Int, $desc: String) {
+const UPDATE_PROPERTY = gql`mutation UpdateProperty($id: Int, $type: String, $price: Int, $desc: String) {
   property: update_PROPERTY(where: {id: {_eq: $id}}, _set: {type: $type, price: $price, desc: $desc}) {
     returning {
       id
@@ -165,7 +143,7 @@ const DELETE_IMAGE = gql`mutation DeleteImage($propertyid: Int) {
   }
 }
 `
-const UPDATE_USER = gql `mutation UpdateProfile($id: String, $firstname: String, $lastname: String, $phone: Int) {
+const UPDATE_USER = gql`mutation UpdateProfile($id: String, $firstname: String, $lastname: String, $phone: Int) {
   update_USER(where: {id: {_eq: $id}}, _set: {firstname: $firstname, lastname: $lastname, phone: $phone}) {
     returning {
       id
@@ -175,9 +153,9 @@ const UPDATE_USER = gql `mutation UpdateProfile($id: String, $firstname: String,
     }
   }
 }
-` 
+`
 
-const ADD_USER_ADDRESS = gql `mutation AddUserAddress($userid: String) {
+const ADD_USER_ADDRESS = gql`mutation AddUserAddress($userid: String) {
   insert_ADDRESS(objects: {userid: $userid}) {
     returning {
       userid
@@ -201,15 +179,16 @@ const UPDATE_USER_ADDRESS = gql`mutation UpdateAddress($userid: String, $homeAdd
   providedIn: 'root'
 })
 export class DatabaseService {
-  
+
   clproperties: Property[] = [];
 
   clpropertiesQuery: QueryRef<any>;
+  userQueryRef: QueryRef<any>;
 
   constructor(private apollo: Apollo, private acs: AccountService) { }
 
-  addUser(signupForm: FormGroup, id: string){
-    
+  addUser(signupForm: FormGroup, id: string) {
+
     return this.apollo.mutate({
       mutation: ADD_USER,
       variables: {
@@ -220,53 +199,20 @@ export class DatabaseService {
       }
     })
 
-   
+
   }
 
-  getUser(id: string) {
+  getUser() {
     this.clpropertiesQuery = this.apollo.watchQuery({
       query: GET_USER,
-      variables: {
-        id
-      }
     })
 
-    return this.clpropertiesQuery;
+    return this.clpropertiesQuery.valueChanges;
   }
 
-  uploadImage(event, propertyid){
-    let key = new Date().toDateString() + "" +  event.target.files[0].name;
 
-    Storage.put(key, event.target.files[0],{
-     level: 'public'
-    }).then(res => {
-      this.apollo.mutate({
-        mutation: ADD_IMAGE,
-        variables: {
-          key: res["key"],
-          propertyid
-        }
-      }).subscribe(res => {
-        this.clpropertiesQuery.refetch().then(() => {
-          this.clproperties = this.acs.user.client.properties
-        })
-        swal.fire({
-          title: "Success",
-          icon: "success",
-          buttonsStyling: false,
-          customClass: {
-            confirmButton: "btn btn-success"
-          }
-        });
-      })
-      
-    }).catch(error => {
-      console.log(error)
-    })
-  }
+  addClient(id: string) {
 
-  addClient(id: string){
-  
     return this.apollo.mutate({
       mutation: ADD_CLIENT,
       variables: {
@@ -275,7 +221,7 @@ export class DatabaseService {
     })
   }
 
-  addAddress(homeAddress: string, city: string, postalCode: number){
+  addAddress(homeAddress: string, city: string, postalCode: number) {
     return this.apollo.mutate({
       mutation: ADD_PROPERTY_ADDRESS,
       variables: {
@@ -286,8 +232,8 @@ export class DatabaseService {
     })
   }
 
-  addProperty(type: string, price: number, desc: string, propertyaddressid: number){
-    console.log(this.acs.user.client.id)
+  addProperty(type: string, price: number, desc: string, propertyaddressid: number) {
+
     return this.apollo.mutate({
       mutation: ADD_PROPERTY,
       variables: {
@@ -295,21 +241,20 @@ export class DatabaseService {
         price,
         desc,
         propertyaddressid,
-        clientid: this.acs.user.client.id
       }
     })
   }
 
-  getPropertiesCustomers(){
+  getPropertiesCustomers() {
     return this.apollo.watchQuery({
       query: GET_PROPERTIES_CUSTOMERS,
     }).valueChanges;
   }
 
 
-  updateProperty(property: Property, propertFrom: FormGroup){
+  updateProperty(property: Property, propertFrom: FormGroup) {
     this.updateAddress(property.address, propertFrom).subscribe(res => {
-      
+
     })
     return this.apollo.mutate({
       mutation: UPDATE_PROPERTY,
@@ -318,13 +263,13 @@ export class DatabaseService {
         type: propertFrom.controls["propertyType"].value,
         price: propertFrom.controls["price"].value,
         desc: propertFrom.controls["desc"].value,
-      
+
       }
     })
   }
 
-  updateAddress(address: Address, propertFrom: FormGroup){
-  
+  updateAddress(address: Address, propertFrom: FormGroup) {
+
 
     return this.apollo.mutate({
       mutation: UPDATE_ADDRESS,
@@ -333,12 +278,12 @@ export class DatabaseService {
         homeAddress: propertFrom.controls["propertyAddress"].value,
         city: propertFrom.controls["city"].value,
         postalCode: propertFrom.controls["postalCode"].value,
-      
+
       }
     })
   }
 
-  deleteImage(propertyid: number){
+  deleteImage(propertyid: number) {
     return this.apollo.mutate({
       mutation: DELETE_IMAGE,
       variables: {
@@ -347,12 +292,12 @@ export class DatabaseService {
     })
   }
 
-  setProperty(index: number, property: Property){
+  setProperty(index: number, property: Property) {
     this.clproperties[index] = property
   }
 
-  updateUser(userForm: FormGroup){
-    
+  updateUser(userForm: FormGroup) {
+
     this.updateUserAddress(userForm).subscribe(res => {
 
     })
@@ -368,7 +313,7 @@ export class DatabaseService {
     })
   }
 
-  addUserAddress(userid: string){
+  addUserAddress(userid: string) {
     return this.apollo.mutate({
       mutation: ADD_USER_ADDRESS,
       variables: {
@@ -377,8 +322,8 @@ export class DatabaseService {
     })
   }
 
-  updateUserAddress(userForm: FormGroup){
-    
+  updateUserAddress(userForm: FormGroup) {
+
     return this.apollo.mutate({
       mutation: UPDATE_USER_ADDRESS,
       variables: {
@@ -389,5 +334,5 @@ export class DatabaseService {
       }
     });
   }
-  
+
 }

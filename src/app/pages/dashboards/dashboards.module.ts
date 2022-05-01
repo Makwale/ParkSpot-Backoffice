@@ -10,7 +10,7 @@ import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 
 import { RouterModule } from "@angular/router";
 import { DashboardsRoutes } from "./dashboards.routing";
-import { LoginComponent } from "../examples/login/login.component";
+import { LoginComponent } from "../../layouts/auth-layout/login/login.component";
 import { RegisterComponent } from "../examples/register/register.component";
 import { ExamplesModule } from "../examples/examples.module";
 import { ExamplesRoutes } from "../examples/examples.routing";
@@ -29,4 +29,4 @@ import { ExamplesRoutes } from "../examples/examples.routing";
   ],
   exports: [ExamplesModule]
 })
-export class DashboardsModule {}
+export class DashboardsModule { }

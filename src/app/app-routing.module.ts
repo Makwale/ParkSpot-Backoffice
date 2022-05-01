@@ -3,7 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";
 import { PresentationComponent } from "./pages/presentation/presentation.component";
-import { LoginComponent } from "./pages/examples/login/login.component";
+import { LoginComponent } from "./layouts/auth-layout/login/login.component";
 import { RegisterComponent } from "./pages/examples/register/register.component";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { AuthLayoutComponent } from "./layouts/auth-layout/auth-layout.component";
@@ -20,7 +20,12 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     children: [
       {
-        path: "dashboards",
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: "dashboard",
         loadChildren: () => import('./pages/dashboards/dashboards.module').then(m => m.DashboardsModule)
       },
       {

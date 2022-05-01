@@ -1,25 +1,23 @@
-<div
-  class=" header pb-6 d-flex align-items-center"
-  style="min-height: 500px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;"
->
+<div class=" header pb-6 d-flex align-items-center"
+  style="min-height: 500px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
   <span class=" mask bg-gradient-danger opacity-8"> </span>
 
   <div class=" container-fluid d-flex align-items-center">
     <div class=" row">
-      
+
       <div class=" col-lg-12 col-md-10" *ngIf="acs.user">
         <h1 class=" display-2 text-white">Hello</h1>
-        <h1 class=" display-2 text-white">{{acs.user.firstname}} {{acs.user.lastname}}</h1>
+        <h1 class=" display-2 text-white">{{acs.user.name}} {{acs.user.surname}}</h1>
 
         <p class=" text-white mt-0 mb-5">
           This is your profile.
         </p>
 
         <a (click)="updateProfile()" class=" btn btn-neutral" href="javascript:void(0)">
-         <span *ngIf="!isCreated">
-          {{isEdit ? 'Update Profile' : 'Edit Profile'}}
-         </span>
-         <app-spinner *ngIf="isCreated"></app-spinner>
+          <span *ngIf="!isCreated">
+            {{isEdit ? 'Update Profile' : 'Edit Profile'}}
+          </span>
+          <app-spinner *ngIf="isCreated"></app-spinner>
         </a>
 
       </div>
@@ -32,11 +30,13 @@
   <div class=" row">
 
     <div class=" col-xl-12 order-xl-1">
-    
+
       <div class=" card">
         <div class=" card-header">
           <div class=" row align-items-center">
-            <div class=" col-8"><h3 class=" mb-0">Edit profile</h3></div>
+            <div class=" col-8">
+              <h3 class=" mb-0">Edit profile</h3>
+            </div>
 
           </div>
         </div>
@@ -53,15 +53,8 @@
                       Phone
                     </label>
 
-                    <input
-                      class=" form-control"
-                      id="input-username"
-                      placeholder="Phone"
-                      type="text"
-                      value="0"
-                      formControlName="phone"
-                      [readonly]="!isEdit"
-                    />
+                    <input class=" form-control" id="input-username" placeholder="Phone" type="text" value="0"
+                      formControlName="phone" [readonly]="!isEdit" />
                   </div>
                 </div>
 
@@ -71,14 +64,8 @@
                       Email address
                     </label>
 
-                    <input
-                      class=" form-control"
-                      id="input-email"
-                      placeholder="jesse@example.com"
-                      type="email"
-                      formControlName="email"
-                      [readonly]="!isEdit"
-                    />
+                    <input class=" form-control" id="input-email" placeholder="jesse@example.com" type="email"
+                      formControlName="email" [readonly]="!isEdit" />
                   </div>
                 </div>
               </div>
@@ -90,15 +77,8 @@
                       First name
                     </label>
 
-                    <input
-                      class=" form-control"
-                      id="input-first-name"
-                      placeholder="First name"
-                      type="text"
-                      value="Lucky"
-                      formControlName="firstname"
-                      [readonly]="!isEdit"
-                    />
+                    <input class=" form-control" id="input-first-name" placeholder="First name" type="text"
+                      value="Lucky" formControlName="firstname" [readonly]="!isEdit" />
                   </div>
                 </div>
 
@@ -108,15 +88,8 @@
                       Last name
                     </label>
 
-                    <input
-                      class=" form-control"
-                      id="input-last-name"
-                      placeholder="Last name"
-                      type="text"
-                      value="Jesse"
-                      formControlName="lastname"
-                      [readonly]="!isEdit"
-                    />
+                    <input class=" form-control" id="input-last-name" placeholder="Last name" type="text" value="Jesse"
+                      formControlName="lastname" [readonly]="!isEdit" />
                   </div>
                 </div>
               </div>
@@ -134,15 +107,9 @@
                       Address
                     </label>
 
-                    <input
-                      class=" form-control"
-                      id="input-address"
-                      placeholder="Home Address"
-                      type="text"
-                      value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                      formControlName="homeAddress"
-                      [readonly]="!isEdit"
-                    />
+                    <input class=" form-control" id="input-address" placeholder="Home Address" type="text"
+                      value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" formControlName="homeAddress"
+                      [readonly]="!isEdit" />
                   </div>
                 </div>
               </div>
@@ -154,15 +121,8 @@
                       City
                     </label>
 
-                    <input
-                      class=" form-control"
-                      id="input-city"
-                      placeholder="City"
-                      type="text"
-                      value="New York"
-                      formControlName="city"
-                      [readonly]="!isEdit"
-                    />
+                    <input class=" form-control" id="input-city" placeholder="City" type="text" value="New York"
+                      formControlName="city" [readonly]="!isEdit" />
                   </div>
                 </div>
 
@@ -172,14 +132,8 @@
                       Postal code
                     </label>
 
-                    <input
-                      class=" form-control"
-                      id="input-postal-code"
-                      placeholder="Postal code"
-                      type="number"
-                      formControlName="postalCode"
-                      [readonly]="!isEdit"
-                    />
+                    <input class=" form-control" id="input-postal-code" placeholder="Postal code" type="number"
+                      formControlName="postalCode" [readonly]="!isEdit" />
                   </div>
                 </div>
               </div>
