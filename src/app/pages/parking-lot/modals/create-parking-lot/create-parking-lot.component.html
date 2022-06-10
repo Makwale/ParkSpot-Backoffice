@@ -1,0 +1,30 @@
+<h3 mat-dialog-title>Add Parking Lot</h3>
+<div mat-dialog-content>
+    <form [formGroup]="parkingForm">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Name</label>
+          <input formControlName="name" type="email" class="form-control" placeholder="Enter name" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Parking Spot</label>
+          <input formControlName="numberOfSpots" type="number" class="form-control" placeholder="Enter number of spaces" id="exampleInputPassword1">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Latitude</label>
+          <input formControlName="lat" type="number" class="form-control" placeholder="-26.18041816484279" id="exampleInputPassword1">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Longitude</label>
+          <input formControlName="lon" type="number" class="form-control" placeholder="28.04933787358404" id="exampleInputPassword1">
+        </div>
+      </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+  <button (click)="createParkingLot()" mat-button  class="text-primary">
+    <span *ngIf="!isLoading">Save</span>
+    <div *ngIf="isLoading" class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    </button>
+</div>

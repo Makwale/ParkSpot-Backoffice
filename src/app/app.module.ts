@@ -24,12 +24,20 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { UsersComponent } from "./pages/users/users.component";
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { ParkingLotComponent } from "./pages/parking-lot/parking-lot.component";
+import {MatDialogModule} from '@angular/material/dialog';
+import { CreateParkingLotComponent } from "./pages/parking-lot/modals/create-parking-lot/create-parking-lot.component";
+
 @NgModule({
   declarations: [
     AppComponent,
     AuthLayoutComponent,
     AdminLayoutComponent,
-    UsersComponent
+    UsersComponent,
+    ParkingLotComponent,
+    CreateParkingLotComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -51,7 +59,10 @@ import {MatButtonModule} from '@angular/material/button';
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatProgressBarModule,
+    MatCheckboxModule,
+    MatDialogModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [AmplifyService, Apollo],

@@ -3,11 +3,32 @@
         <label>Filter users</label>
         <input (keydown)="searchUser()" [formControl]="searchControl" class="form-control" placeholder="Enter user info">
     </div>
-      <div class="card">
+    <mat-progress-bar *ngIf="isLoadingData" mode="buffer"></mat-progress-bar>
+      <div class="card" [hidden]="isLoadingData">
         <div class="card-body">
             <div>
                 <table mat-table [dataSource]="dataSource" matSort>
-
+                  <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                        [aria-label]="checkboxLabel()">
+                      </mat-checkbox>
+                      <button class="ml-2 p-0" [disabled]="!selection.hasValue()"  mat-icon-button>
+                        <span class="material-icons">
+                            cloud_download
+                        </span>
+                      </button>
+                     </th>
+                    <td mat-cell *matCellDef="let row"> 
+                        <mat-checkbox (click)="$event.stopPropagation()"
+                                  (change)="$event ? selection.toggle(row) : null"
+                                  [checked]="selection.isSelected(row)"
+                                  [aria-label]="checkboxLabel(row)">
+                    </mat-checkbox> 
+                    </td>
+                  </ng-container>
                   <ng-container matColumnDef="id">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
                     <td mat-cell *matCellDef="let row"> {{row.id}} </td>

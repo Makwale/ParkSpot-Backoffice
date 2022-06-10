@@ -1,3 +1,4 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
@@ -6,19 +7,20 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { User } from './models/user.model';
 import { UserService } from './services/user.service';
-
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['id', 'name', 'surname', 'email', 'actions'];
+  displayedColumns: string[] = ['select', 'id', 'name', 'surname', 'email', 'actions'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   users: User[] = [];
   searchControl: FormControl;
+  isLoadingData: boolean;
+  selection = new SelectionModel<any>(true, []);
   constructor(
     private userService: UserService
   ) { }
@@ -30,12 +32,13 @@ export class UsersComponent implements OnInit, AfterViewInit {
   }
 
   getUsers(){
+    this.isLoadingData = true;
     this.userService.getUsers().subscribe(response => {
       this.users = response.data.users;
       this.dataSource.data = this.users;
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-      console.log(response.data);
+      this.isLoadingData = false;
     })
   }
 
@@ -56,5 +59,31 @@ export class UsersComponent implements OnInit, AfterViewInit {
       });
     }
   }
+
+  checkboxLabel(row?: User): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+    }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${
+      row.name
+    }`;
+  }
+
+    /** Whether the number of selected elements matches the total number of rows. */
+    isAllSelected() {
+      const numSelected = this.selection.selected.length;
+      const numRows = this.dataSource.data.length;
+      return numSelected === numRows;
+    }
+  
+    /** Selects all rows if they are not all selected; otherwise clear selection. */
+    masterToggle() {
+      if (this.isAllSelected()) {
+        this.selection.clear();
+        return;
+      }
+      this.selection.select(...this.dataSource.data);
+
+    }
 
 }

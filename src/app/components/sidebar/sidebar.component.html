@@ -8,11 +8,7 @@
   <div class="scrollbar-inner">
     <div class="sidenav-header d-flex align-items-center">
       <a class="navbar-brand" [routerLink]="['presentation']">
-        <img
-          src="assets/img/brand/red.png"
-          class="navbar-brand-img"
-          alt="..."
-        />
+        ParkSpot
       </a>
       <div class="ml-auto">
         <!-- Sidenav toggler -->
@@ -42,8 +38,10 @@
               *ngIf="menuitem.type === 'link'"
               class="nav-link"
             >
-            <i class="{{menuitem.icontype}} text-primary"> </i>
-              <span class="nav-link-text">{{ menuitem.title }}</span>
+            <span class="material-icons">
+              {{menuitem.icontype}}
+            </span>
+              <span class="ml-2 nav-link-text">{{ menuitem.title }}</span>
             </a>
             <!--If it have a submenu-->
             <a
@@ -55,7 +53,9 @@
               [attr.aria-controls]="menuitem.collapse"
               class="nav-link"
             >
-              <i class="ni {{ menuitem.icontype }}"></i>
+            <span class="material-icons">
+              people
+            </span>
               <span class="nav-link-text">{{ menuitem.title }}</span>
             </a>
 
