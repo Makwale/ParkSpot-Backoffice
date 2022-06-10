@@ -32,6 +32,7 @@ export class ParkingLotComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.searchControl = new FormControl(null);
     this.dataSource = new MatTableDataSource(this.parkings);
     this.getParkings();
   }
