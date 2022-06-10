@@ -5,9 +5,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AuthLayoutRoutes } from "./auth-layout.routing";
 
 import { LoginComponent } from "./login/login.component";
-
-import { RegisterComponent } from "../../pages/examples/register/register.component";
-import { PropertiesComponent } from "src/app/pages/examples/properties/properties.component";
 import { SpinnerComponent } from "src/app/components/spinner/spinner.component";
 
 @NgModule({
@@ -19,8 +16,6 @@ import { SpinnerComponent } from "src/app/components/spinner/spinner.component";
   ],
   declarations: [
     LoginComponent,
-    RegisterComponent,
-    PropertiesComponent,
     SpinnerComponent
   ],
   providers: [],

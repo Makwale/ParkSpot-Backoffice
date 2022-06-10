@@ -2,12 +2,13 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { BrowserModule } from "@angular/platform-browser";
-import { PresentationComponent } from "./pages/presentation/presentation.component";
 import { LoginComponent } from "./layouts/auth-layout/login/login.component";
-import { RegisterComponent } from "./pages/examples/register/register.component";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 import { AuthLayoutComponent } from "./layouts/auth-layout/auth-layout.component";
-
+import { UsersComponent } from "./pages/users/users.component";
+import { ParkingLotComponent } from "./pages/parking-lot/parking-lot.component";
+import { BookingsComponent } from "./pages/bookings/bookings.component";
+import { ProfileComponent } from "./pages/profile/profile.component";
 const routes: Routes = [
 
   {
@@ -21,17 +22,25 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: 'users',
         pathMatch: 'full',
       },
       {
-        path: "dashboard",
-        loadChildren: () => import('./pages/dashboards/dashboards.module').then(m => m.DashboardsModule)
+        path: 'users',
+        component: UsersComponent
       },
       {
-        path: "examples",
-        loadChildren: () => import('./pages/examples/examples.module').then(m => m.ExamplesModule)
-      }
+        path: 'parking-lot',
+        component: ParkingLotComponent
+      },
+      {
+        path: 'bookings',
+        component: BookingsComponent
+      },
+      {
+        path: 'profile',
+        component: ProfileComponent
+      },
     ]
   },
 
@@ -54,7 +63,7 @@ const routes: Routes = [
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes, {
-    })
+    }),
   ],
   exports: [RouterModule]
 })

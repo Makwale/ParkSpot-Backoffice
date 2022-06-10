@@ -61,34 +61,18 @@ export class AppComponent implements OnInit {
 
     localStorage.setItem("token", "");
 
-    // Auth.currentAuthenticatedUser().then(results => {
+    Auth.currentAuthenticatedUser().then(results => {
 
-    //   if (results) {
+      if (results) {
+        console.log(results);
+        this.dbs.getUser().subscribe(response => {
+          this.router.navigate(['admin']);
+          this.acs.loginStatus = true;
+        })
+      }
+    }, reason => {
 
-    //     this.dbs.getUser(results["attributes"].sub).valueChanges.subscribe(response => {
-
-    //       localStorage.setItem("token", results.getSignInUserSession().getIdToken().getJwtToken())
-
-    //       let address: Address = undefined;
-
-    //       address = response.data["user"]["address"][0] ?
-    //         response.data["user"]["address"][0] : { homeAddress: "", city: "", postalCode: "0000" };
-
-    //       let client: Client = response.data["user"]["client"][0];
-
-    //       let user = new User(results["attributes"].sub, results["username"],
-    //         response.data["user"]["firstname"], response.data["user"]["lastname"],
-    //         response.data["user"]["email"], response.data["user"]["phone"], address, client)
-
-    //       this.acs.user = user;
-
-    //       this.acs.loginStatus = true;
-
-    //     })
-    //   }
-    // }, reason => {
-
-    // })
+    })
 
   }
 }

@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         this.isCreated = false;
         this.acs.user = response.data.user[0];
         this.acs.loginStatus = true;
-        this.router.navigate(['admin/dashboard'])
+        this.router.navigate(['admin'])
 
       }, error => {
         console.log(error);

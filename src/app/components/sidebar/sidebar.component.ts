@@ -32,16 +32,32 @@ export interface ChildrenItems2 {
 //Menu Items
 export const ROUTES: RouteInfo[] = [
   {
-    path: "/examples",
-    title: "Account",
-    type: "sub",
-    icontype: "ni-ungroup text-orange",
-    collapse: "examples",
+    path: "/admin/users",
+    title: "Users",
+    type: "link",
+    icontype: "fas fa-users",
     isCollapsed: true,
-    children: [
-      { path: "profile", title: "Profile", type: "link" },
-      { path: "properties", title: "Properties", type: "link" }
-    ]
+  },
+  {
+    path: "/admin/parking-lot",
+    title: "Parking Lot",
+    type: "link",
+    icontype: "fas fa-list",
+    isCollapsed: true,
+  },
+  {
+    path: "/admin/bookings",
+    title: "Bookings",
+    type: "link",
+    icontype: "fas fa-list",
+    isCollapsed: true,
+  },
+  {
+    path: "/admin/profile",
+    title: "Profile",
+    type: "link",
+    icontype: "fas fa-list",
+    isCollapsed: true,
   },
 
 ];

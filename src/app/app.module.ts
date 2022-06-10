@@ -13,24 +13,23 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
-import { PresentationComponent } from "./pages/presentation/presentation.component";
 import { AdminLayoutComponent } from "./layouts/admin-layout/admin-layout.component";
 
 import { GraphQLModule } from "./graphql.module";
 import { Apollo } from "apollo-angular";
 import { AuthLayoutComponent } from "./layouts/auth-layout/auth-layout.component";
-import { PresentationModule } from "./pages/presentation/presentation.module";
 import { ComponentsModule } from "./components/components.module";
-import { SpinnerComponent } from "./components/spinner/spinner.component";
-import { SpinnerModule } from "./components/spinner/spinner.module";
-
-
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { UsersComponent } from "./pages/users/users.component";
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
 @NgModule({
   declarations: [
     AppComponent,
     AuthLayoutComponent,
     AdminLayoutComponent,
-  
+    UsersComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -43,11 +42,16 @@ import { SpinnerModule } from "./components/spinner/spinner.module";
     ToastrModule.forRoot(),
     CollapseModule.forRoot(),
     TagInputModule,
-    PresentationModule,
     BrowserModule,
     AppRoutingModule,
     AmplifyAngularModule,
     GraphQLModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatInputModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [AmplifyService, Apollo],
