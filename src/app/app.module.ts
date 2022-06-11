@@ -29,6 +29,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { ParkingLotComponent } from "./pages/parking-lot/parking-lot.component";
 import {MatDialogModule} from '@angular/material/dialog';
 import { CreateParkingLotComponent } from "./pages/parking-lot/modals/create-parking-lot/create-parking-lot.component";
+import { PricingComponent } from "./pages/parking-lot/modals/pricing/pricing.component";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CreateParkingLotComponent } from "./pages/parking-lot/modals/create-par
     AdminLayoutComponent,
     UsersComponent,
     ParkingLotComponent,
-    CreateParkingLotComponent
+    CreateParkingLotComponent,
+    PricingComponent
   ],
   imports: [
     BrowserAnimationsModule,

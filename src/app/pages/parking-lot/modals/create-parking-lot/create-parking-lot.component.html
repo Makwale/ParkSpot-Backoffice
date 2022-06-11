@@ -17,6 +17,22 @@
           <label for="exampleInputPassword1">Longitude</label>
           <input formControlName="lon" type="number" class="form-control" placeholder="28.04933787358404" id="exampleInputPassword1">
         </div>
+        <hr>
+        <span class="h3">Pricings</span>
+        <button (click)="addPricings()" class="text-success ml-2" mat-flat-button>
+          Add
+          <span class="material-icons ">add</span>
+        </button>
+        <div class="mt-3">
+          <div *ngFor="let pricing of pricings; let i=index" class="mt-2">
+            <span class="badge badge-primary">{{pricing.duration}}</span>
+            <span class="ml-3 badge badge-dark text-light" >{{pricing.price | currency: 'R'}}</span>
+            <button (click)="deletePrice(i)" mat-icon-button> <span class="material-icons text-danger">
+              remove_circle
+              </span>
+            </button>
+          </div>
+        </div>
       </form>
 </div>
 <div mat-dialog-actions align="end">

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ParkingLotService } from '../../services/parking-lot.service';
 import swal from "sweetalert2";
+import { MatDialog } from '@angular/material/dialog';
+import { PricingComponent } from '../pricing/pricing.component';
 @Component({
   selector: 'app-create-parking-lot',
   templateUrl: './create-parking-lot.component.html',
@@ -10,9 +12,11 @@ import swal from "sweetalert2";
 export class CreateParkingLotComponent implements OnInit {
   isLoading: boolean;
   parkingForm: FormGroup;
+  pricings: any[] = [];
   constructor(
     private ps: ParkingLotService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -34,13 +38,15 @@ export class CreateParkingLotComponent implements OnInit {
       geo: {
         lat: this.parkingForm.value.lat,
         lon: this.parkingForm.value.lon
-      }
+      },
+      pricings: this.pricings
     }
     if(this.parkingForm.valid){
       this.isLoading = true;
       this.ps.createParkingLot(data).subscribe(response => {
         this.isLoading = false;
         this.parkingForm.reset();
+        this.pricings = [];
         swal.fire({
           title: "Successfully created",
           icon: "success",
@@ -48,6 +54,21 @@ export class CreateParkingLotComponent implements OnInit {
         this.ps.parkingsQueryRef.refetch();
       })
     }
+  }
+
+  addPricings(){
+    this.dialog.open(PricingComponent, {
+      width: '300px'
+    }).afterClosed().subscribe(results => {
+      console.log(results);
+      if(results){
+        this.pricings.push(results);
+      }
+    })
+  }
+
+  deletePrice(index: number){
+    this.pricings.splice(index, 1);
   }
 
 }
