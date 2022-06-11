@@ -7,6 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { User } from './models/user.model';
 import { UserService } from './services/user.service';
+import { jsPDF } from 'jspdf';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -84,6 +85,28 @@ export class UsersComponent implements OnInit, AfterViewInit {
       }
       this.selection.select(...this.dataSource.data);
 
+    }
+
+    generateReport(){
+      const doc = new jsPDF({
+        orientation: 'l',
+      });
+  
+      doc?.text('USERS REPORT', 115, 20);
+      let index = 1;
+      doc?.cell(10, 40, 55, 10, 'First Name'.toUpperCase(), index, 'left');
+      doc?.cell(10, 40, 55, 10, 'Last Name'.toUpperCase(), index, 'left');
+      doc?.cell(10, 40, 100, 10, 'Email'.toUpperCase(), index, 'left');
+
+      index++;
+      for (const user of this.selection.selected) {
+
+        doc?.cell(10, 40, 55, 10, user?.name?.toUpperCase(), index, 'left');
+        doc?.cell(10, 40, 55, 10, user?.surname?.toUpperCase(), index, 'left');
+        doc?.cell(10, 40, 100, 10, `${user?.email}`, index, 'left');
+        index++;
+      }
+      doc?.save('Users Report.pdf');
     }
 
 }

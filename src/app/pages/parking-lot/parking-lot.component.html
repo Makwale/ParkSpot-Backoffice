@@ -21,7 +21,7 @@
                         [indeterminate]="selection.hasValue() && !isAllSelected()"
                         [aria-label]="checkboxLabel()">
                       </mat-checkbox>
-                      <button class="ml-2 p-0" [disabled]="!selection.hasValue()"  mat-icon-button>
+                      <button (click)="generateReport()" class="ml-2 p-0" [disabled]="!selection.hasValue()"  mat-icon-button>
                         <span class="material-icons">
                             cloud_download
                         </span>

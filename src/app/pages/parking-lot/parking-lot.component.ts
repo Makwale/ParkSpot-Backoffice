@@ -12,6 +12,7 @@ import { ParkingLotService } from './services/parking-lot.service';
 import swal from "sweetalert2";
 import { UtilsService } from 'src/app/shared/services/utils.service';
 import { EditParkingLotComponent } from './modals/edit-parking-lot/edit-parking-lot.component';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-parking-lot',
@@ -109,7 +110,27 @@ export class ParkingLotComponent implements OnInit {
         });
       })
     }
-   
+  }
+
+  generateReport(){
+    const doc = new jsPDF({
+      orientation: 'l',
+    });
+
+    doc?.text('PARKING LOT REPORT', 115, 20);
+    let index = 1;
+    doc?.cell(10, 40, 100, 10, 'Name'.toUpperCase(), index, 'left');
+    doc?.cell(10, 40, 100, 10, 'Number of spaces'.toUpperCase(), index, 'left');
+
+    index++;
+    for (const parking of this.selection.selected) {
+      console.log(parking);
+      doc?.cell(10, 40, 100, 10, parking?.name?.toUpperCase(), index, 'left');
+      doc?.cell(10, 40, 100, 10, parking?.numberOfSpots.toString(), index, 'left');
+
+      index++;
+    }
+    doc?.save('Parking Lot Report.pdf');
   }
 
 }
