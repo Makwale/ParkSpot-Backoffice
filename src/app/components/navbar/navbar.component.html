@@ -20,6 +20,23 @@
           <span aria-hidden="true">×</span>
         </button>
       </form>
+      <ul class="navbar-nav align-items-center ml-md-auto">
+        <li class="nav-item d-xl-none">
+          <!-- Sidenav toggler -->
+          <div
+            class="pr-3 sidenav-toggler sidenav-toggler-dark"
+            data-action="sidenav-pin"
+            data-target="#sidenav-main"
+            (click)="openSidebar()"
+          >
+            <div class="sidenav-toggler-inner">
+              <i class="sidenav-toggler-line"></i>
+              <i class="sidenav-toggler-line"></i>
+              <i class="sidenav-toggler-line"></i>
+            </div>
+          </div>
+        </li>
+      </ul>
  
       <!-- User -->
       <ul class="navbar-nav align-items-center ml-auto">
@@ -29,11 +46,11 @@
               <span class="avatar avatar-sm rounded-circle">
                 <img
                   alt="Image placeholder"
-                  src="assets/img/theme/team-4.jpg"
+                  src="assets/img/profile.jpeg"
                 />
               </span>
               <div class="media-body ml-2 d-none d-lg-block" *ngIf="acs.user">
-                <span class="mb-0 text-sm  font-weight-bold">{{acs.user.firstname}} {{acs.user.lastname}}</span>
+                <span class="mb-0 text-sm  font-weight-bold">{{acs.user.name}} {{acs.user.surname}}</span>
               </div>
             </div>
           </a>
