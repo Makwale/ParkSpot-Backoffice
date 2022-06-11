@@ -31,6 +31,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { CreateParkingLotComponent } from "./pages/parking-lot/modals/create-parking-lot/create-parking-lot.component";
 import { PricingComponent } from "./pages/parking-lot/modals/pricing/pricing.component";
 import { EditParkingLotComponent } from "./pages/parking-lot/modals/edit-parking-lot/edit-parking-lot.component";
+import { BookingsComponent } from "./pages/bookings/bookings.component";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { EditParkingLotComponent } from "./pages/parking-lot/modals/edit-parking
     ParkingLotComponent,
     CreateParkingLotComponent,
     PricingComponent,
-    EditParkingLotComponent
+    EditParkingLotComponent,
+    BookingsComponent
   ],
   imports: [
     BrowserAnimationsModule,
