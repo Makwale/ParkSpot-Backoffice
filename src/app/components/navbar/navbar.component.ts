@@ -124,7 +124,7 @@ export class NavbarComponent implements OnInit, DoCheck {
       this.acs.user = null;
       this.acs.clientid = undefined;
       localStorage.setItem("token", "");
-      this.router.navigateByUrl("presentation")
+      this.router.navigateByUrl("auth")
     })
   }
 

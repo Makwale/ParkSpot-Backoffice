@@ -26,6 +26,8 @@ query GetUser {
     id
     name
     surname
+    email
+    role
   }
 }
 `;

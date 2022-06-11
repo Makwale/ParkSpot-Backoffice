@@ -1,7 +1,7 @@
 <div class="container-fluid mt-5">
     <div class="form-group">
-        <label>Filter parking lot</label>
-        <input (keydown)="searchBooking()" [formControl]="searchControl" class="form-control" placeholder="Enter parking lot info">
+        <label>Filter bookings</label>
+        <input (keydown)="searchBooking()" [formControl]="searchControl" class="form-control" placeholder="Enter booking info">
     </div>
     <mat-progress-bar *ngIf="isLoadingData" mode="buffer"></mat-progress-bar>
       <div class="card" [hidden]="isLoadingData">

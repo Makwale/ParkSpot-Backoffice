@@ -32,6 +32,7 @@ import { CreateParkingLotComponent } from "./pages/parking-lot/modals/create-par
 import { PricingComponent } from "./pages/parking-lot/modals/pricing/pricing.component";
 import { EditParkingLotComponent } from "./pages/parking-lot/modals/edit-parking-lot/edit-parking-lot.component";
 import { BookingsComponent } from "./pages/bookings/bookings.component";
+import { ProfileComponent } from "./pages/profile/profile.component";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { BookingsComponent } from "./pages/bookings/bookings.component";
     CreateParkingLotComponent,
     PricingComponent,
     EditParkingLotComponent,
-    BookingsComponent
+    BookingsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserAnimationsModule,
