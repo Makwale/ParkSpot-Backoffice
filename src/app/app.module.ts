@@ -30,6 +30,7 @@ import { ParkingLotComponent } from "./pages/parking-lot/parking-lot.component";
 import {MatDialogModule} from '@angular/material/dialog';
 import { CreateParkingLotComponent } from "./pages/parking-lot/modals/create-parking-lot/create-parking-lot.component";
 import { PricingComponent } from "./pages/parking-lot/modals/pricing/pricing.component";
+import { EditParkingLotComponent } from "./pages/parking-lot/modals/edit-parking-lot/edit-parking-lot.component";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { PricingComponent } from "./pages/parking-lot/modals/pricing/pricing.com
     UsersComponent,
     ParkingLotComponent,
     CreateParkingLotComponent,
-    PricingComponent
+    PricingComponent,
+    EditParkingLotComponent
   ],
   imports: [
     BrowserAnimationsModule,

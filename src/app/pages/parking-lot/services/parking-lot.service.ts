@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo, QueryRef } from 'apollo-angular';
-import { DELETE_PARKING_LOT, GET_PARKING_LOT, INSERT_PARKING_LOT } from '../graphql/parking-log.gql';
+import { DELETE_PARKING_LOT, GET_PARKING_LOT, INSERT_PARKING_LOT, UPDATE_PARKING_LOT } from '../graphql/parking-log.gql';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class ParkingLotService {
       variables: {
         data
       }
-    })
+    });
   }
 
   deleteParkingLot(id: string){
@@ -32,6 +32,17 @@ export class ParkingLotService {
       mutation: DELETE_PARKING_LOT,
       variables: {
         id
+      }
+    });
+  }
+
+
+  updateParkingLot(id: string, data: any){
+    return this.apollo.mutate({
+      mutation: UPDATE_PARKING_LOT,
+      variables: {
+        id,
+        data
       }
     })
   }

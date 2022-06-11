@@ -8,6 +8,7 @@ query GetParkingLots {
       numberOfSpots: number_parking_spot
       spotsAvailable: number_available_spot
       geo
+      pricings
     }
   }
   `;
@@ -26,3 +27,12 @@ mutation DeleteParking($id: uuid!) {
     }
   }
 `;
+
+export const UPDATE_PARKING_LOT = gql`
+mutation UpdateParkingLot($id: uuid!, $data: parking_lot_set_input) {
+  update_parking_lot(where: {id: {_eq: $id}}, _set: $data){
+    returning{
+      id
+    }
+  }
+}`;

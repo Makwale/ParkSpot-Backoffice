@@ -11,6 +11,7 @@ import { Parking } from './models/parking.model';
 import { ParkingLotService } from './services/parking-lot.service';
 import swal from "sweetalert2";
 import { UtilsService } from 'src/app/shared/services/utils.service';
+import { EditParkingLotComponent } from './modals/edit-parking-lot/edit-parking-lot.component';
 
 @Component({
   selector: 'app-parking-lot',
@@ -87,6 +88,13 @@ export class ParkingLotComponent implements OnInit {
   addParkingLot(){
     this.dialog.open(CreateParkingLotComponent, {
       width: '400px',
+    })
+  }
+
+  editParkingLot(parkingLot: Parking){
+    this.dialog.open(EditParkingLotComponent, {
+      width: '400px',
+      data: parkingLot
     })
   }
 

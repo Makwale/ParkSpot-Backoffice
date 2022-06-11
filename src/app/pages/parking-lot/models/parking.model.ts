@@ -4,4 +4,5 @@ export interface Parking{
     numberOfSpots: number;
     spotsAvailable: number;
     geo: any;
+    pricings: any[];
 }
